@@ -5,6 +5,8 @@ It is a high quality sensor showing PM2.5, CO2, Temperature and Humidity on a sm
 
 For build instructions please visit https://www.airgradient.com/diy/
 
+Use LOLIN(WEMOS) D1 R2 & mini board.
+
 Compatible with the following sensors:
 Plantower PMS5003 (Fine Particle Sensor)
 SenseAir S8 (CO2 Sensor)
@@ -47,9 +49,14 @@ boolean hasSHT = true;
 // set to true if you want to connect to wifi. The display will show values only when the sensor has wifi connection
 boolean connectWIFI = true;
 
-// InfluxDB v1
+// InfluxDB 2 server url, e.g. http://192.168.1.48:8086 (Use: InfluxDB UI -> Load Data -> Client Libraries)
 #define INFLUXDB_URL ""
-#define INFLUXDB_DB_NAME ""
+// InfluxDB 2 server or cloud API authentication token (Use: InfluxDB UI -> Load Data -> Tokens -> <select token>)
+#define INFLUXDB_TOKEN ""
+// InfluxDB 2 organization name or id (Use: InfluxDB UI -> Settings -> Profile -> <name under tile> )
+#define INFLUXDB_ORG ""
+// InfluxDB 2 bucket name (Use: InfluxDB UI -> Load Data -> Buckets)
+#define INFLUXDB_BUCKET ""
 
 // Set timezone string according to https://www.gnu.org/software/libc/manual/html_node/TZ-Variable.html
 // Examples:
@@ -59,7 +66,7 @@ boolean connectWIFI = true;
 //  Central Europe: "CET-1CEST,M3.5.0,M10.5.0/3"
 #define TZ_INFO "PST8PDT"
 
-InfluxDBClient client(INFLUXDB_URL, INFLUXDB_DB_NAME);
+InfluxDBClient client(INFLUXDB_URL, INFLUXDB_ORG, INFLUXDB_BUCKET, INFLUXDB_TOKEN);
 
 AirGradient ag = AirGradient();
 
